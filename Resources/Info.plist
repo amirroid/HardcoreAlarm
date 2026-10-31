@@ -28,5 +28,16 @@
     <false/>
     <key>NSSupportsAutomaticGraphicsSwitching</key>
     <true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>com.hardcore.HardcoreAlarm</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>hardcorealarm</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

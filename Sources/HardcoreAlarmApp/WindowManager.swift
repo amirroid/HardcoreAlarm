@@ -6,10 +6,17 @@ import HardcoreAlarmCore
 public final class WindowManager: ObservableObject {
     public static let shared = WindowManager()
     
-    private var overlayWindow: NSWindow?
+    public weak var mainWindow: NSWindow?
+    public var overlayWindow: NSWindow?
     private var verificationWindow: NSWindow?
     
     public init() {}
+    
+    public func setMainWindow(_ window: NSWindow) {
+        self.mainWindow = window
+        window.delegate = WindowCloseInterceptor.shared
+        window.isReleasedWhenClosed = false
+    }
     
     // MARK: - Alarm Full-Screen Overlay Window
     public func presentAlarmOverlay(alarm: Alarm, onDismiss: @escaping @MainActor () -> Void, onSnooze: @escaping @MainActor () -> Void) {
@@ -104,5 +111,42 @@ public final class WindowManager: ObservableObject {
     public func closeVerification() {
         self.verificationWindow?.orderOut(nil)
         self.verificationWindow = nil
+    }
+}
+
+// MARK: - Window Close Interceptor
+public final class WindowCloseInterceptor: NSObject, NSWindowDelegate, @unchecked Sendable {
+    public static let shared = WindowCloseInterceptor()
+    
+    public func windowShouldClose(_ sender: NSWindow) -> Bool {
+        sender.orderOut(nil)
+        return false // Do not destroy window; hide it so it can be instantly reopened!
+    }
+}
+
+// MARK: - Window Accessor for SwiftUI
+public struct WindowAccessor: NSViewRepresentable {
+    public let callback: (NSWindow) -> Void
+    
+    public init(callback: @escaping (NSWindow) -> Void) {
+        self.callback = callback
+    }
+    
+    public func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            if let window = view.window {
+                callback(window)
+            }
+        }
+        return view
+    }
+    
+    public func updateNSView(_ nsView: NSView, context: Context) {
+        DispatchQueue.main.async {
+            if let window = nsView.window {
+                callback(window)
+            }
+        }
     }
 }

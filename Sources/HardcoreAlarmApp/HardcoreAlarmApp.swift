@@ -151,6 +151,12 @@ struct HardcoreAlarmApp: App {
                 }
             }
             .frame(minWidth: 980, minHeight: 680)
+            .background(WindowAccessor { window in
+                WindowManager.shared.setMainWindow(window)
+            })
+            .onOpenURL { _ in
+                MenuBarController.shared.openApp()
+            }
             .sheet(isPresented: $isEditorPresented) {
                 AlarmEditorView(alarm: editingAlarm) { savedAlarm in
                     if let index = AlarmScheduler.shared.alarms.firstIndex(where: { $0.id == savedAlarm.id }) {
@@ -300,5 +306,11 @@ public final class AppDelegate: NSObject, NSApplicationDelegate {
     // Keep app running in menu bar when main window is closed
     public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return false
+    }
+    
+    // Reopen main dashboard window on Dock click
+    public func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        MenuBarController.shared.openApp()
+        return true
     }
 }
