@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		87AB39A1CCBA331194AFE81D /* HardcoreAlarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB437103D5FF56C8D90E2963 /* HardcoreAlarmApp.swift */; };
+		17ABFA83BC53B36CB637F406 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B748FCA5CCC3B8F3D78A463 /* WindowManager.swift */; };
+		3529A8004C7F47BDA76E0038 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BBBC060064EC01CA818C34 /* MenuBarController.swift */; };
+		1BDE153437AC9DE1C793492A /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37109D393A813B6B8F9EA5F /* DashboardView.swift */; };
+		24925DB003D4A22A40C2D981 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C93614BC3D30B39EEB98ADC /* SettingsView.swift */; };
+		597832B80E3C92EB0CCFF7B0 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9678999D494989B7AE8726 /* ViewState.swift */; };
+		991720153BD481AD575CDC8C /* AlarmEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA118D7C98EBB28A226302 /* AlarmEditorView.swift */; };
+		1C1316AD9957AC56C97A36B6 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A81F922CD3813D88089355 /* StatisticsView.swift */; };
+		4C3E8C3B858CF3C6AEF547C7 /* AlarmOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E1C796D566AE0B84450669 /* AlarmOverlayView.swift */; };
+		C94580BDC591D4AC14C32D3A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB53C8FCA6E31AB49E1990D0 /* Theme.swift */; };
+		5C603340EECC0225EBCA6BCE /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BF9C425B255DFD47669F0 /* AlarmListView.swift */; };
+		EFD5815BE95255A6A45B5E27 /* MemoryChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95A28F32B82BE30FB87E611 /* MemoryChallengeView.swift */; };
+		9CDFCFD484E53B19330E207E /* PatternChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1D55BB7D7784DA33BD33F4 /* PatternChallengeView.swift */; };
+		2C2B467A779160493023A059 /* MultiStepContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C086A2AA1AC0B5CC4D7A1B /* MultiStepContainerView.swift */; };
+		A3406EE2FD3C4DC594599640 /* WakeUpVerificationModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90205B2595A6029989D42F34 /* WakeUpVerificationModal.swift */; };
+		960EC39922A0A35ECB45F716 /* MathChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FF9E73A4109DEDD45D81D7 /* MathChallengeView.swift */; };
+		2DA1A80A990F2588A763BBAD /* TypingChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F87010B1684F6794DE77C7 /* TypingChallengeView.swift */; };
+		DD08D996854411B4ACA86277 /* UIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67958F9087FBCB2AB9B949F2 /* UIComponents.swift */; };
+		A992A4323A0280E4F73761E8 /* WakeUpVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33F1C7CA6BEA9A0224AF32B /* WakeUpVerificationManager.swift */; };
+		5A486F12778AAD80D971576F /* AlarmScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5164AD4CB081862C74A74DEA /* AlarmScheduler.swift */; };
+		6005E8A65E06652672693171 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C71114BF656C3DF3596D87F /* NotificationManager.swift */; };
+		A04AC7789C53EEF41D2EC680 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E8A446B6B70DE2C0E9B640 /* PersistenceService.swift */; };
+		C93AA5EF21C100B9E8769052 /* PowerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BFF99E4090AFDBEEDF583F /* PowerManager.swift */; };
+		C4FD9765ADC088E1212BB4E9 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06DA059E85844136DBAA8DBC /* AudioEngine.swift */; };
+		C9F52DAEB79C43E97CFF36EE /* MemoryChallengeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05EDCD74EE6707B7D5B3B /* MemoryChallengeEngine.swift */; };
+		F5D668861488917B3F964916 /* MultiStepChallengeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04F369689FF0CE7F1A0CD77 /* MultiStepChallengeEngine.swift */; };
+		BCDEAA6C38BCB3C10D38B33E /* MathChallengeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A6C328137181DC48ED5DDA /* MathChallengeEngine.swift */; };
+		4B150310E9E6546EBED5A397 /* PatternChallengeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE686A475FD9D21A630CB57C /* PatternChallengeEngine.swift */; };
+		71B71CE35AD7AF872A9AFC90 /* TypingChallengeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD34F2949A93A6415801727D /* TypingChallengeEngine.swift */; };
+		E550A342CEB2BA898781336B /* ChallengeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853C5AC1708D8E308476B6DF /* ChallengeModel.swift */; };
+		AFB241097271E9C913B8CB50 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F58A551BCD7429072240B /* AppSettings.swift */; };
+		52234EFAFB6F81A7F75F0633 /* AlarmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD391E78FA40712948BFF7C /* AlarmModel.swift */; };
+		515D6161AA850485B9F28450 /* HistoryRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810923E28BC146803DEBDC7A /* HistoryRecord.swift */; };
+		D9C279FA537BD5532A8A01D9 /* AlarmPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88034BC3046990992FB2FB /* AlarmPreset.swift */; };
+		9E43F93C8F407811603FABC2 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = FFE5036BBE0836D35ED6DF23 /* AppIcon.icns */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A948EBEAF48CE51A0522237 /* HardcoreAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HardcoreAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB437103D5FF56C8D90E2963 /* HardcoreAlarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/HardcoreAlarmApp.swift"; sourceTree = SOURCE_ROOT; };
+		4B748FCA5CCC3B8F3D78A463 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/WindowManager.swift"; sourceTree = SOURCE_ROOT; };
+		D6BBBC060064EC01CA818C34 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/MenuBarController.swift"; sourceTree = SOURCE_ROOT; };
+		C37109D393A813B6B8F9EA5F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/DashboardView.swift"; sourceTree = SOURCE_ROOT; };
+		4C93614BC3D30B39EEB98ADC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/SettingsView.swift"; sourceTree = SOURCE_ROOT; };
+		AB9678999D494989B7AE8726 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ViewState.swift"; sourceTree = SOURCE_ROOT; };
+		28FA118D7C98EBB28A226302 /* AlarmEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/AlarmEditorView.swift"; sourceTree = SOURCE_ROOT; };
+		41A81F922CD3813D88089355 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/StatisticsView.swift"; sourceTree = SOURCE_ROOT; };
+		F2E1C796D566AE0B84450669 /* AlarmOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/AlarmOverlayView.swift"; sourceTree = SOURCE_ROOT; };
+		EB53C8FCA6E31AB49E1990D0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/Theme.swift"; sourceTree = SOURCE_ROOT; };
+		652BF9C425B255DFD47669F0 /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/AlarmListView.swift"; sourceTree = SOURCE_ROOT; };
+		E95A28F32B82BE30FB87E611 /* MemoryChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ChallengeViews/MemoryChallengeView.swift"; sourceTree = SOURCE_ROOT; };
+		DB1D55BB7D7784DA33BD33F4 /* PatternChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ChallengeViews/PatternChallengeView.swift"; sourceTree = SOURCE_ROOT; };
+		63C086A2AA1AC0B5CC4D7A1B /* MultiStepContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ChallengeViews/MultiStepContainerView.swift"; sourceTree = SOURCE_ROOT; };
+		90205B2595A6029989D42F34 /* WakeUpVerificationModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ChallengeViews/WakeUpVerificationModal.swift"; sourceTree = SOURCE_ROOT; };
+		63FF9E73A4109DEDD45D81D7 /* MathChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ChallengeViews/MathChallengeView.swift"; sourceTree = SOURCE_ROOT; };
+		E6F87010B1684F6794DE77C7 /* TypingChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/ChallengeViews/TypingChallengeView.swift"; sourceTree = SOURCE_ROOT; };
+		67958F9087FBCB2AB9B949F2 /* UIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmApp/UI/Components/UIComponents.swift"; sourceTree = SOURCE_ROOT; };
+		E33F1C7CA6BEA9A0224AF32B /* WakeUpVerificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Core/WakeUpVerificationManager.swift"; sourceTree = SOURCE_ROOT; };
+		5164AD4CB081862C74A74DEA /* AlarmScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Core/AlarmScheduler.swift"; sourceTree = SOURCE_ROOT; };
+		6C71114BF656C3DF3596D87F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Core/NotificationManager.swift"; sourceTree = SOURCE_ROOT; };
+		88E8A446B6B70DE2C0E9B640 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Core/PersistenceService.swift"; sourceTree = SOURCE_ROOT; };
+		54BFF99E4090AFDBEEDF583F /* PowerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Core/PowerManager.swift"; sourceTree = SOURCE_ROOT; };
+		06DA059E85844136DBAA8DBC /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Core/AudioEngine.swift"; sourceTree = SOURCE_ROOT; };
+		0BF05EDCD74EE6707B7D5B3B /* MemoryChallengeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Challenges/MemoryChallengeEngine.swift"; sourceTree = SOURCE_ROOT; };
+		C04F369689FF0CE7F1A0CD77 /* MultiStepChallengeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Challenges/MultiStepChallengeEngine.swift"; sourceTree = SOURCE_ROOT; };
+		96A6C328137181DC48ED5DDA /* MathChallengeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Challenges/MathChallengeEngine.swift"; sourceTree = SOURCE_ROOT; };
+		DE686A475FD9D21A630CB57C /* PatternChallengeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Challenges/PatternChallengeEngine.swift"; sourceTree = SOURCE_ROOT; };
+		BD34F2949A93A6415801727D /* TypingChallengeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Challenges/TypingChallengeEngine.swift"; sourceTree = SOURCE_ROOT; };
+		853C5AC1708D8E308476B6DF /* ChallengeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Models/ChallengeModel.swift"; sourceTree = SOURCE_ROOT; };
+		B51F58A551BCD7429072240B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Models/AppSettings.swift"; sourceTree = SOURCE_ROOT; };
+		FBD391E78FA40712948BFF7C /* AlarmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Models/AlarmModel.swift"; sourceTree = SOURCE_ROOT; };
+		810923E28BC146803DEBDC7A /* HistoryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Models/HistoryRecord.swift"; sourceTree = SOURCE_ROOT; };
+		BE88034BC3046990992FB2FB /* AlarmPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sources/HardcoreAlarmCore/Models/AlarmPreset.swift"; sourceTree = SOURCE_ROOT; };
+		FFE5036BBE0836D35ED6DF23 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Resources/AppIcon.icns"; sourceTree = SOURCE_ROOT; };
+		49C50622C93AD236274A54D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Resources/Info.plist"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22DA51FEBEA3142ADA7B523E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5EC7380A7C5F5BAC6A2BA90F = {
+			isa = PBXGroup;
+			children = (
+				962B193A970E5DD4144A6085 /* Sources */,
+				15763A2B09E578026183BF50 /* Resources */,
+				1DD467E8D0B5BDFF0BF7E342 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1DD467E8D0B5BDFF0BF7E342 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A948EBEAF48CE51A0522237 /* HardcoreAlarm.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		962B193A970E5DD4144A6085 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				FB437103D5FF56C8D90E2963 /* HardcoreAlarmApp.swift */,
+				D6BBBC060064EC01CA818C34 /* MenuBarController.swift */,
+				28FA118D7C98EBB28A226302 /* AlarmEditorView.swift */,
+				652BF9C425B255DFD47669F0 /* AlarmListView.swift */,
+				F2E1C796D566AE0B84450669 /* AlarmOverlayView.swift */,
+				63FF9E73A4109DEDD45D81D7 /* MathChallengeView.swift */,
+				E95A28F32B82BE30FB87E611 /* MemoryChallengeView.swift */,
+				63C086A2AA1AC0B5CC4D7A1B /* MultiStepContainerView.swift */,
+				DB1D55BB7D7784DA33BD33F4 /* PatternChallengeView.swift */,
+				E6F87010B1684F6794DE77C7 /* TypingChallengeView.swift */,
+				90205B2595A6029989D42F34 /* WakeUpVerificationModal.swift */,
+				67958F9087FBCB2AB9B949F2 /* UIComponents.swift */,
+				C37109D393A813B6B8F9EA5F /* DashboardView.swift */,
+				4C93614BC3D30B39EEB98ADC /* SettingsView.swift */,
+				41A81F922CD3813D88089355 /* StatisticsView.swift */,
+				EB53C8FCA6E31AB49E1990D0 /* Theme.swift */,
+				AB9678999D494989B7AE8726 /* ViewState.swift */,
+				4B748FCA5CCC3B8F3D78A463 /* WindowManager.swift */,
+				96A6C328137181DC48ED5DDA /* MathChallengeEngine.swift */,
+				0BF05EDCD74EE6707B7D5B3B /* MemoryChallengeEngine.swift */,
+				C04F369689FF0CE7F1A0CD77 /* MultiStepChallengeEngine.swift */,
+				DE686A475FD9D21A630CB57C /* PatternChallengeEngine.swift */,
+				BD34F2949A93A6415801727D /* TypingChallengeEngine.swift */,
+				5164AD4CB081862C74A74DEA /* AlarmScheduler.swift */,
+				06DA059E85844136DBAA8DBC /* AudioEngine.swift */,
+				6C71114BF656C3DF3596D87F /* NotificationManager.swift */,
+				88E8A446B6B70DE2C0E9B640 /* PersistenceService.swift */,
+				54BFF99E4090AFDBEEDF583F /* PowerManager.swift */,
+				E33F1C7CA6BEA9A0224AF32B /* WakeUpVerificationManager.swift */,
+				FBD391E78FA40712948BFF7C /* AlarmModel.swift */,
+				BE88034BC3046990992FB2FB /* AlarmPreset.swift */,
+				B51F58A551BCD7429072240B /* AppSettings.swift */,
+				853C5AC1708D8E308476B6DF /* ChallengeModel.swift */,
+				810923E28BC146803DEBDC7A /* HistoryRecord.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		15763A2B09E578026183BF50 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FFE5036BBE0836D35ED6DF23 /* AppIcon.icns */,
+				49C50622C93AD236274A54D0 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FEA02BD1B9B3F7BCFE7419D7 /* HardcoreAlarm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80D0B5F8145B88F57E7D78F4 /* Build configuration list for PBXNativeTarget "HardcoreAlarm" */;
+			buildPhases = (
+				B035E90AE4D87EBD218A437A /* Sources */,
+				22DA51FEBEA3142ADA7B523E /* Frameworks */,
+				AB6E0D4AF36D1D68E3BBB652 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HardcoreAlarm;
+			productName = HardcoreAlarm;
+			productReference = 1A948EBEAF48CE51A0522237 /* HardcoreAlarm.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CECBE37CB26C86ACEC8B6ACC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = C1541876987F43881CAD5105 /* Build configuration list for PBXProject "HardcoreAlarm" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5EC7380A7C5F5BAC6A2BA90F;
+			productRefGroup = 1DD467E8D0B5BDFF0BF7E342 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FEA02BD1B9B3F7BCFE7419D7 /* HardcoreAlarm */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB6E0D4AF36D1D68E3BBB652 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E43F93C8F407811603FABC2 /* AppIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B035E90AE4D87EBD218A437A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87AB39A1CCBA331194AFE81D /* HardcoreAlarmApp.swift in Sources */,
+				3529A8004C7F47BDA76E0038 /* MenuBarController.swift in Sources */,
+				991720153BD481AD575CDC8C /* AlarmEditorView.swift in Sources */,
+				5C603340EECC0225EBCA6BCE /* AlarmListView.swift in Sources */,
+				4C3E8C3B858CF3C6AEF547C7 /* AlarmOverlayView.swift in Sources */,
+				960EC39922A0A35ECB45F716 /* MathChallengeView.swift in Sources */,
+				EFD5815BE95255A6A45B5E27 /* MemoryChallengeView.swift in Sources */,
+				2C2B467A779160493023A059 /* MultiStepContainerView.swift in Sources */,
+				9CDFCFD484E53B19330E207E /* PatternChallengeView.swift in Sources */,
+				2DA1A80A990F2588A763BBAD /* TypingChallengeView.swift in Sources */,
+				A3406EE2FD3C4DC594599640 /* WakeUpVerificationModal.swift in Sources */,
+				DD08D996854411B4ACA86277 /* UIComponents.swift in Sources */,
+				1BDE153437AC9DE1C793492A /* DashboardView.swift in Sources */,
+				24925DB003D4A22A40C2D981 /* SettingsView.swift in Sources */,
+				1C1316AD9957AC56C97A36B6 /* StatisticsView.swift in Sources */,
+				C94580BDC591D4AC14C32D3A /* Theme.swift in Sources */,
+				597832B80E3C92EB0CCFF7B0 /* ViewState.swift in Sources */,
+				17ABFA83BC53B36CB637F406 /* WindowManager.swift in Sources */,
+				BCDEAA6C38BCB3C10D38B33E /* MathChallengeEngine.swift in Sources */,
+				C9F52DAEB79C43E97CFF36EE /* MemoryChallengeEngine.swift in Sources */,
+				F5D668861488917B3F964916 /* MultiStepChallengeEngine.swift in Sources */,
+				4B150310E9E6546EBED5A397 /* PatternChallengeEngine.swift in Sources */,
+				71B71CE35AD7AF872A9AFC90 /* TypingChallengeEngine.swift in Sources */,
+				5A486F12778AAD80D971576F /* AlarmScheduler.swift in Sources */,
+				C4FD9765ADC088E1212BB4E9 /* AudioEngine.swift in Sources */,
+				6005E8A65E06652672693171 /* NotificationManager.swift in Sources */,
+				A04AC7789C53EEF41D2EC680 /* PersistenceService.swift in Sources */,
+				C93AA5EF21C100B9E8769052 /* PowerManager.swift in Sources */,
+				A992A4323A0280E4F73761E8 /* WakeUpVerificationManager.swift in Sources */,
+				52234EFAFB6F81A7F75F0633 /* AlarmModel.swift in Sources */,
+				D9C279FA537BD5532A8A01D9 /* AlarmPreset.swift in Sources */,
+				AFB241097271E9C913B8CB50 /* AppSettings.swift in Sources */,
+				E550A342CEB2BA898781336B /* ChallengeModel.swift in Sources */,
+				515D6161AA850485B9F28450 /* HistoryRecord.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		49CADFB8A24ABA7F8027606B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		7AC33EEC7814C3B50020FEB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		A4082213C3D59FB69F1430BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hardcore.HardcoreAlarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		E0DA4FC19F714B95442A482C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hardcore.HardcoreAlarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C1541876987F43881CAD5105 /* Build configuration list for PBXProject "HardcoreAlarm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49CADFB8A24ABA7F8027606B /* Debug */,
+				7AC33EEC7814C3B50020FEB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80D0B5F8145B88F57E7D78F4 /* Build configuration list for PBXNativeTarget "HardcoreAlarm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4082213C3D59FB69F1430BE /* Debug */,
+				E0DA4FC19F714B95442A482C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CECBE37CB26C86ACEC8B6ACC /* Project object */;
+}
