@@ -8,6 +8,9 @@ public struct AlarmOverlayView: View {
     @UIState private var solveMistakes: Int = 0
     @UIState private var solveDuration: TimeInterval = 0
     @UIState private var pulseState: Bool = false
+    @UIState private var showQuitAttemptWarning: Bool = false
+    @UIState private var shakeOffset: CGFloat = 0
+    @UIState private var warningTimer: Timer?
     
     public var onDismissCompleted: () -> Void
     public var onSnooze: () -> Void
@@ -62,6 +65,39 @@ public struct AlarmOverlayView: View {
                 }
                 .padding(.horizontal, 36)
                 .padding(.top, 32)
+                
+                if showQuitAttemptWarning {
+                    HStack(spacing: 14) {
+                        Image(systemName: "lock.shield.fill")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(.white)
+                        
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("COMMAND + Q IS HARDCORE BLOCKED")
+                                .font(.system(size: 13, weight: .black, design: .monospaced))
+                                .foregroundColor(.white)
+                            Text("Hardcore Lock Active: Quitting, minimizing, or escaping is forbidden. Complete all challenges to dismiss!")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.white.opacity(0.95))
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 22)
+                    .padding(.vertical, 14)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color(red: 0.88, green: 0.12, blue: 0.12))
+                            .shadow(color: Color.red.opacity(0.85), radius: 24, x: 0, y: 6)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.white.opacity(0.4), lineWidth: 1.5)
+                    )
+                    .padding(.horizontal, 36)
+                    .offset(x: shakeOffset)
+                    .transition(.asymmetric(insertion: .scale(scale: 0.95).combined(with: .opacity), removal: .opacity))
+                }
                 
                 // Clock & Alarm Title
                 VStack(spacing: 6) {
@@ -139,9 +175,32 @@ public struct AlarmOverlayView: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("HardcoreAlarmQuitAttempted"))) { _ in
+            warningTimer?.invalidate()
+            withAnimation(.easeInOut(duration: 0.08).repeatCount(4, autoreverses: true)) {
+                shakeOffset = 12
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                shakeOffset = 0
+            }
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                showQuitAttemptWarning = true
+            }
+            let timer = Timer(timeInterval: 4.0, repeats: false) { _ in
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.showQuitAttemptWarning = false
+                    }
+                }
+            }
+            RunLoop.main.add(timer, forMode: .common)
+            warningTimer = timer
+        }
         .onDisappear {
             timeTimer?.invalidate()
             timeTimer = nil
+            warningTimer?.invalidate()
+            warningTimer = nil
         }
     }
     

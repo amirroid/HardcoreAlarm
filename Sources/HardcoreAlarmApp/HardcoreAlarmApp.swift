@@ -165,12 +165,54 @@ struct HardcoreAlarmApp: App {
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
+        .commands {
+            CommandGroup(replacing: .appTermination) {
+                Button("Quit Hardcore Alarm") {
+                    if AlarmScheduler.shared.isAlarmActive || WakeUpVerificationManager.shared.isVerificationActive {
+                        NSSound.beep()
+                        NotificationCenter.default.post(name: NSNotification.Name("HardcoreAlarmQuitAttempted"), object: nil)
+                        return
+                    }
+                    NSApp.terminate(nil)
+                }
+                .keyboardShortcut("q", modifiers: .command)
+            }
+        }
     }
 }
 
 // MARK: - App Delegate
 public final class AppDelegate: NSObject, NSApplicationDelegate {
+    private var eventMonitor: Any?
+    
     public func applicationDidFinishLaunching(_ notification: Notification) {
+        // Setup Hardcore Lockout key interceptor (swallows Cmd+Q, Cmd+W, Cmd+M, Cmd+H, Esc during active alarm/verification)
+        eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+            let isAlarmActive = AlarmScheduler.shared.isAlarmActive
+            let isVerificationActive = WakeUpVerificationManager.shared.isVerificationActive
+            
+            if isAlarmActive || isVerificationActive {
+                let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+                
+                if flags.contains(.command) {
+                    if let chars = event.charactersIgnoringModifiers?.lowercased() {
+                        if chars == "q" || chars == "w" || chars == "m" || chars == "h" {
+                            NSSound.beep()
+                            NotificationCenter.default.post(name: NSNotification.Name("HardcoreAlarmQuitAttempted"), object: nil)
+                            return nil // Completely block and drop key event!
+                        }
+                    }
+                }
+                
+                if event.keyCode == 53 { // Escape
+                    NSSound.beep()
+                    NotificationCenter.default.post(name: NSNotification.Name("HardcoreAlarmQuitAttempted"), object: nil)
+                    return nil
+                }
+            }
+            return event
+        }
+        
         // Setup menu bar extra
         MenuBarController.shared.setup()
         
@@ -243,5 +285,20 @@ public final class AppDelegate: NSObject, NSApplicationDelegate {
             
             AlarmScheduler.shared.triggerAlarm(penaltyAlarm)
         }
+    }
+    
+    // Hardcore Quit Lockout: Refuse application termination while an alarm or verification is active
+    public func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if AlarmScheduler.shared.isAlarmActive || WakeUpVerificationManager.shared.isVerificationActive {
+            NSSound.beep()
+            NotificationCenter.default.post(name: NSNotification.Name("HardcoreAlarmQuitAttempted"), object: nil)
+            return .terminateCancel
+        }
+        return .terminateNow
+    }
+    
+    // Keep app running in menu bar when main window is closed
+    public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return false
     }
 }

@@ -73,7 +73,13 @@ public final class MenuBarController: NSObject {
         menu.addItem(NSMenuItem.separator())
         
         // Quit
-        let quitItem = NSMenuItem(title: "Quit Hardcore Alarm", action: #selector(quitApp), keyEquivalent: "q")
+        let isLocked = AlarmScheduler.shared.isAlarmActive || WakeUpVerificationManager.shared.isVerificationActive
+        let quitItem: NSMenuItem
+        if isLocked {
+            quitItem = NSMenuItem(title: "🔒 Quit Blocked (Alarm Ringing)", action: #selector(quitApp), keyEquivalent: "")
+        } else {
+            quitItem = NSMenuItem(title: "Quit Hardcore Alarm", action: #selector(quitApp), keyEquivalent: "q")
+        }
         quitItem.target = self
         menu.addItem(quitItem)
         
@@ -102,6 +108,11 @@ public final class MenuBarController: NSObject {
     }
     
     @objc private func quitApp() {
+        if AlarmScheduler.shared.isAlarmActive || WakeUpVerificationManager.shared.isVerificationActive {
+            NSSound.beep()
+            NotificationCenter.default.post(name: NSNotification.Name("HardcoreAlarmQuitAttempted"), object: nil)
+            return
+        }
         NSApp.terminate(nil)
     }
 }

@@ -14,6 +14,15 @@ public final class WakeUpVerificationManager: ObservableObject, @unchecked Senda
     
     @Published public private(set) var status: Status = .idle
     
+    public var isVerificationActive: Bool {
+        switch status {
+        case .idle, .verifiedComplete:
+            return false
+        case .pending, .promptActive, .failedReAlarm:
+            return true
+        }
+    }
+    
     private var verificationTimer: Timer?
     private var promptTimer: Timer?
     private var currentAlarm: Alarm?

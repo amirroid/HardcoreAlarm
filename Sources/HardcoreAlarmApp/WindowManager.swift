@@ -23,6 +23,17 @@ public final class WindowManager: ObservableObject {
         
         guard let screen = NSScreen.main else { return }
         
+        // Enable Kiosk-grade lockdown presentation options
+        NSApp.presentationOptions = [
+            .hideDock,
+            .hideMenuBar,
+            .disableAppleMenu,
+            .disableProcessSwitching,
+            .disableForceQuit,
+            .disableSessionTermination,
+            .disableHideApplication
+        ]
+        
         let window = NSWindow(
             contentRect: screen.frame,
             styleMask: [.borderless, .fullSizeContentView],
@@ -34,8 +45,10 @@ public final class WindowManager: ObservableObject {
         window.level = .screenSaver // High system priority above ordinary windows
         window.isOpaque = false
         window.backgroundColor = .clear
-        window.hasShadow = true
-        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+        window.hasShadow = false
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
+        window.canHide = false
+        window.hidesOnDeactivate = false
         
         let overlayView = AlarmOverlayView(
             alarm: alarm,
@@ -55,6 +68,7 @@ public final class WindowManager: ObservableObject {
     }
     
     public func closeOverlay() {
+        NSApp.presentationOptions = []
         self.overlayWindow?.orderOut(nil)
         self.overlayWindow = nil
     }

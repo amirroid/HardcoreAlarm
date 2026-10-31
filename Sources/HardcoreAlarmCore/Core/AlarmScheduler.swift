@@ -11,6 +11,10 @@ public final class AlarmScheduler: ObservableObject, @unchecked Sendable {
     @Published public private(set) var timeUntilNextAlarm: TimeInterval?
     @Published public private(set) var activeRingingAlarm: Alarm?
     
+    public var isAlarmActive: Bool {
+        return activeRingingAlarm != nil
+    }
+    
     private var timer: Timer?
     private var sleepCheckTimestamp: Date?
     private let calendar = Calendar.current
