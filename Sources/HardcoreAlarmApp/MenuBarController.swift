@@ -87,29 +87,7 @@ public final class MenuBarController: NSObject {
     }
     
     @objc public func openApp() {
-        NSApp.activate(ignoringOtherApps: true)
-        
-        if let window = WindowManager.shared.mainWindow {
-            if window.isMiniaturized {
-                window.deminiaturize(nil)
-            }
-            window.makeKeyAndOrderFront(nil)
-            return
-        }
-        
-        if let window = NSApp.windows.first(where: { !($0 is NSPanel) && $0 != WindowManager.shared.overlayWindow }) {
-            WindowManager.shared.setMainWindow(window)
-            if window.isMiniaturized {
-                window.deminiaturize(nil)
-            }
-            window.makeKeyAndOrderFront(nil)
-            return
-        }
-        
-        // Fallback: URL scheme for SwiftUI WindowGroup
-        if let url = URL(string: "hardcorealarm://dashboard") {
-            NSWorkspace.shared.open(url)
-        }
+        WindowManager.shared.showDashboardWindow()
     }
     
     @objc private func triggerTestAlarm() {

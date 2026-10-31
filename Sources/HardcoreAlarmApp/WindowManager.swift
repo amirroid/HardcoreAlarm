@@ -6,11 +6,48 @@ import HardcoreAlarmCore
 public final class WindowManager: ObservableObject {
     public static let shared = WindowManager()
     
-    public weak var mainWindow: NSWindow?
+    public var mainWindow: NSWindow?
     public var overlayWindow: NSWindow?
     private var verificationWindow: NSWindow?
     
     public init() {}
+    
+    public func showDashboardWindow() {
+        NSApp.activate(ignoringOtherApps: true)
+        
+        if let window = mainWindow {
+            if window.isMiniaturized {
+                window.deminiaturize(nil)
+            }
+            window.makeKeyAndOrderFront(nil)
+            return
+        }
+        
+        createDashboardWindow()
+    }
+    
+    public func createDashboardWindow() {
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 1040, height: 700),
+            styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+            backing: .buffered,
+            defer: false
+        )
+        window.center()
+        window.title = "Hardcore Alarm"
+        window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
+        window.isReleasedWhenClosed = false
+        window.minSize = NSSize(width: 980, height: 680)
+        window.delegate = WindowCloseInterceptor.shared
+        
+        let hostingController = NSHostingController(rootView: RootDashboardView())
+        window.contentViewController = hostingController
+        
+        self.mainWindow = window
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
     
     public func setMainWindow(_ window: NSWindow) {
         self.mainWindow = window

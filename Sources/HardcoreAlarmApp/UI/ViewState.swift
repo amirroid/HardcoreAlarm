@@ -4,6 +4,7 @@ import Combine
 /// A drop-in, robust state property wrapper for standalone macOS builds
 /// that does not depend on the SwiftUIMacros compiler plugin.
 @propertyWrapper
+@MainActor
 public struct UIState<Value>: DynamicProperty {
     @StateObject private var storage: Storage
     
@@ -27,7 +28,7 @@ public struct UIState<Value>: DynamicProperty {
         )
     }
     
-    private final class Storage: ObservableObject {
+    private final class Storage: ObservableObject, @unchecked Sendable {
         @Published var value: Value
         init(_ value: Value) {
             self.value = value

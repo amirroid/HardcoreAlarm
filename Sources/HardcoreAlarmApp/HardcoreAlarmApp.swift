@@ -5,172 +5,14 @@ import HardcoreAlarmCore
 @main
 struct HardcoreAlarmApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @UIState private var currentTab: NavigationTab = .dashboard
-    @UIState private var editingAlarm: Alarm? = nil
-    @UIState private var isEditorPresented: Bool = false
     
     init() {}
     
-    enum NavigationTab: String, CaseIterable, Identifiable {
-        case dashboard = "Dashboard"
-        case alarms = "Alarms"
-        case statistics = "Statistics"
-        case settings = "Settings"
-        
-        var id: String { rawValue }
-        
-        var iconName: String {
-            switch self {
-            case .dashboard: return "clock.fill"
-            case .alarms: return "bell.badge.fill"
-            case .statistics: return "chart.bar.xaxis"
-            case .settings: return "gearshape.fill"
-            }
-        }
-    }
-    
     public var body: some Scene {
-        WindowGroup {
-            ZStack {
-                Theme.bgDeep.ignoresSafeArea()
-                
-                HStack(spacing: 0) {
-                    // Navigation Sidebar
-                    VStack(alignment: .leading, spacing: 12) {
-                        // App Brand
-                        HStack(spacing: 10) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Theme.accentAmber)
-                                    .frame(width: 34, height: 34)
-                                Image(systemName: "bell.fill")
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.black)
-                            }
-                            
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text("HARDCORE")
-                                    .font(.system(size: 14, weight: .black, design: .monospaced))
-                                    .foregroundColor(Theme.textPrimary)
-                                Text("ALARM SYSTEM")
-                                    .font(.system(size: 9, weight: .bold, design: .monospaced))
-                                    .foregroundColor(Theme.accentAmber)
-                            }
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 20)
-                        .padding(.bottom, 16)
-                        
-                        Divider().background(Theme.borderSubtle).padding(.horizontal, 12)
-                        
-                        // Nav Items
-                        VStack(spacing: 4) {
-                            ForEach(NavigationTab.allCases) { tab in
-                                Button(action: { currentTab = tab }) {
-                                    HStack(spacing: 10) {
-                                        Image(systemName: tab.iconName)
-                                            .font(.system(size: 13, weight: .semibold))
-                                            .foregroundColor(currentTab == tab ? Theme.accentAmber : Theme.textMuted)
-                                            .frame(width: 20)
-                                        
-                                        Text(tab.rawValue)
-                                            .font(.system(size: 13, weight: currentTab == tab ? .bold : .medium))
-                                            .foregroundColor(currentTab == tab ? Theme.textPrimary : Theme.textSecondary)
-                                        
-                                        Spacer()
-                                    }
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 8)
-                                    .background(currentTab == tab ? Theme.bgCardHover : Color.clear)
-                                    .cornerRadius(8)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(currentTab == tab ? Theme.borderMedium : Color.clear, lineWidth: 1)
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                        .padding(.horizontal, 12)
-                        
-                        Spacer()
-                        
-                        // Status Footer
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack(spacing: 6) {
-                                Circle()
-                                    .fill(Theme.accentGreen)
-                                    .frame(width: 7, height: 7)
-                                Text("System Guard Active")
-                                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                    .foregroundColor(Theme.textSecondary)
-                            }
-                            Text("Apple Silicon Native • v1.0")
-                                .font(.system(size: 9))
-                                .foregroundColor(Theme.textDim)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 20)
-                    }
-                    .frame(width: 210)
-                    .background(Theme.bgSecondary)
-                    
-                    Divider().background(Theme.borderSubtle)
-                    
-                    // Main Content Canvas
-                    Group {
-                        switch currentTab {
-                        case .dashboard:
-                            DashboardView(
-                                onNavigateToAlarms: { currentTab = .alarms },
-                                onNavigateToStats: { currentTab = .statistics },
-                                onNavigateToSettings: { currentTab = .settings },
-                                onEditAlarm: { alarm in
-                                    editingAlarm = alarm
-                                    isEditorPresented = true
-                                }
-                            )
-                        case .alarms:
-                            AlarmListView(
-                                onAddAlarm: {
-                                    editingAlarm = nil
-                                    isEditorPresented = true
-                                },
-                                onEditAlarmWithModel: { alarm in
-                                    editingAlarm = alarm
-                                    isEditorPresented = true
-                                }
-                            )
-                        case .statistics:
-                            StatisticsView()
-                        case .settings:
-                            SettingsView()
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            }
-            .frame(minWidth: 980, minHeight: 680)
-            .background(WindowAccessor { window in
-                WindowManager.shared.setMainWindow(window)
-            })
-            .onOpenURL { _ in
-                MenuBarController.shared.openApp()
-            }
-            .sheet(isPresented: $isEditorPresented) {
-                AlarmEditorView(alarm: editingAlarm) { savedAlarm in
-                    if let index = AlarmScheduler.shared.alarms.firstIndex(where: { $0.id == savedAlarm.id }) {
-                        var list = AlarmScheduler.shared.alarms
-                        list[index] = savedAlarm
-                        AlarmScheduler.shared.updateAlarms(list)
-                    } else {
-                        AlarmScheduler.shared.addAlarm(savedAlarm)
-                    }
-                }
-            }
+        Settings {
+            SettingsView()
+                .frame(minWidth: 500, minHeight: 400)
         }
-        .windowStyle(.hiddenTitleBar)
-        .windowResizability(.contentSize)
         .commands {
             CommandGroup(replacing: .appTermination) {
                 Button("Quit Hardcore Alarm") {
@@ -182,6 +24,166 @@ struct HardcoreAlarmApp: App {
                     NSApp.terminate(nil)
                 }
                 .keyboardShortcut("q", modifiers: .command)
+            }
+        }
+    }
+}
+
+public struct RootDashboardView: View {
+    @UIState private var currentTab: NavigationTab = .dashboard
+    @UIState private var editingAlarm: Alarm? = nil
+    @UIState private var isEditorPresented: Bool = false
+    
+    public init() {}
+    
+    public enum NavigationTab: String, CaseIterable, Identifiable {
+        case dashboard = "Dashboard"
+        case alarms = "Alarms"
+        case statistics = "Statistics"
+        case settings = "Settings"
+        
+        public var id: String { rawValue }
+        
+        public var iconName: String {
+            switch self {
+            case .dashboard: return "clock.fill"
+            case .alarms: return "bell.badge.fill"
+            case .statistics: return "chart.bar.xaxis"
+            case .settings: return "gearshape.fill"
+            }
+        }
+    }
+    
+    public var body: some View {
+        ZStack {
+            Theme.bgDeep.ignoresSafeArea()
+            
+            HStack(spacing: 0) {
+                // Navigation Sidebar
+                VStack(alignment: .leading, spacing: 12) {
+                    // App Brand
+                    HStack(spacing: 10) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Theme.accentAmber)
+                                .frame(width: 34, height: 34)
+                            Image(systemName: "bell.fill")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text("HARDCORE")
+                                .font(.system(size: 14, weight: .black, design: .monospaced))
+                                .foregroundColor(Theme.textPrimary)
+                            Text("ALARM SYSTEM")
+                                .font(.system(size: 9, weight: .bold, design: .monospaced))
+                                .foregroundColor(Theme.accentAmber)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 20)
+                    .padding(.bottom, 16)
+                    
+                    Divider().background(Theme.borderSubtle).padding(.horizontal, 12)
+                    
+                    // Nav Items
+                    VStack(spacing: 4) {
+                        ForEach(NavigationTab.allCases) { tab in
+                            Button(action: { currentTab = tab }) {
+                                HStack(spacing: 10) {
+                                    Image(systemName: tab.iconName)
+                                        .font(.system(size: 13, weight: .semibold))
+                                        .foregroundColor(currentTab == tab ? Theme.accentAmber : Theme.textMuted)
+                                        .frame(width: 20)
+                                    
+                                    Text(tab.rawValue)
+                                        .font(.system(size: 13, weight: currentTab == tab ? .bold : .medium))
+                                        .foregroundColor(currentTab == tab ? Theme.textPrimary : Theme.textSecondary)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(currentTab == tab ? Theme.bgCardHover : Color.clear)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(currentTab == tab ? Theme.borderMedium : Color.clear, lineWidth: 1)
+                                )
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                    
+                    Spacer()
+                    
+                    // Status Footer
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(spacing: 6) {
+                            Circle()
+                                .fill(Theme.accentGreen)
+                                .frame(width: 7, height: 7)
+                            Text("System Guard Active")
+                                .font(.system(size: 10, weight: .bold, design: .monospaced))
+                                .foregroundColor(Theme.textSecondary)
+                        }
+                        Text("Apple Silicon Native • v1.0")
+                            .font(.system(size: 9))
+                            .foregroundColor(Theme.textDim)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 20)
+                }
+                .frame(width: 210)
+                .background(Theme.bgSecondary)
+                
+                Divider().background(Theme.borderSubtle)
+                
+                // Main Content Canvas
+                Group {
+                    switch currentTab {
+                    case .dashboard:
+                        DashboardView(
+                            onNavigateToAlarms: { currentTab = .alarms },
+                            onNavigateToStats: { currentTab = .statistics },
+                            onNavigateToSettings: { currentTab = .settings },
+                            onEditAlarm: { alarm in
+                                editingAlarm = alarm
+                                isEditorPresented = true
+                            }
+                        )
+                    case .alarms:
+                        AlarmListView(
+                            onAddAlarm: {
+                                editingAlarm = nil
+                                isEditorPresented = true
+                            },
+                            onEditAlarmWithModel: { alarm in
+                                editingAlarm = alarm
+                                isEditorPresented = true
+                            }
+                        )
+                    case .statistics:
+                        StatisticsView()
+                    case .settings:
+                        SettingsView()
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .frame(minWidth: 980, minHeight: 680)
+        .sheet(isPresented: $isEditorPresented) {
+            AlarmEditorView(alarm: editingAlarm) { savedAlarm in
+                if let index = AlarmScheduler.shared.alarms.firstIndex(where: { $0.id == savedAlarm.id }) {
+                    var list = AlarmScheduler.shared.alarms
+                    list[index] = savedAlarm
+                    AlarmScheduler.shared.updateAlarms(list)
+                } else {
+                    AlarmScheduler.shared.addAlarm(savedAlarm)
+                }
             }
         }
     }
@@ -291,6 +293,9 @@ public final class AppDelegate: NSObject, NSApplicationDelegate {
             
             AlarmScheduler.shared.triggerAlarm(penaltyAlarm)
         }
+        
+        // Show Main Dashboard Window on Launch
+        WindowManager.shared.showDashboardWindow()
     }
     
     // Hardcore Quit Lockout: Refuse application termination while an alarm or verification is active
@@ -310,7 +315,7 @@ public final class AppDelegate: NSObject, NSApplicationDelegate {
     
     // Reopen main dashboard window on Dock click
     public func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        MenuBarController.shared.openApp()
+        WindowManager.shared.showDashboardWindow()
         return true
     }
 }
